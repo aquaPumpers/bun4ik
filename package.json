@@ -1,0 +1,31 @@
+{
+  "name": "bun4ik",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "bunx --bun astro dev",
+    "start": "bun astro check && bunx --bun astro dev --verbose",
+    "build": "bunx --bun astro build",
+    "preview": "bunx --bun astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.5.5",
+    "@astrojs/react": "^3.0.10",
+    "@astrojs/starlight": "^0.19.0",
+    "@astrojs/starlight-tailwind": "^2.0.1",
+    "@astrojs/tailwind": "^5.1.0",
+    "@types/react": "^18.2.57",
+    "@types/react-dom": "^18.2.19",
+    "astro": "^4.3.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sharp": "^0.32.5",
+    "starlight-blog": "^0.5.0",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.0.6"
+  }
+}
