@@ -1,0 +1,135 @@
+---
+title: Начиная
+---
+
+импортировать { Tabs, TabItem } из @astrojs/starlight/comComponents
+
+Установите интеграцию Starlight Blog с помощью вашего любимого менеджера пакетов:
+
+<tabs>
+  <tabitem label="pnpm"></tabitem></tabs>
+
+```shell
+pnpm add starlight-blog
+```
+
+  
+  <tabitem label="yarn"></tabitem>
+
+```shell
+yarn add starlight-blog
+```
+
+  
+  <tabitem label="npm"></tabitem>
+
+```shell
+npm i starlight-blog
+```
+
+  
+  <tabitem label="bun"></tabitem>
+
+```shell
+bun add starlight-blog
+```
+
+  
+  <tabitem label="ni"></tabitem>
+
+```shell
+ni starlight-blog
+```
+
+  
+
+
+
+Обновите [конфигурацию Astro](https://docs.astro.build/en/guides/configuring-astro/#supported-config-file-types) , включив интеграцию Starlight Blog ***перед*** интеграцией Starlight, и настройте различные [переопределения компонентов,](https://starlight.astro.build/guides/overriding-components/) необходимые для интеграции:
+
+```ts
+import starlight from '@astrojs/starlight'
+import { defineConfig } from 'astro/config'
+import starlightBlog from 'starlight-blog'
+
+export default defineConfig({
+  // …
+  integrations: [
+    // Add the Starlight Blog integration.
+    starlightBlog(),
+    starlight({
+      // Configure the Starlight Blog component overrides.
+      components: {
+        MarkdownContent: 'starlight-blog/overrides/MarkdownContent.astro',
+        Sidebar: 'starlight-blog/overrides/Sidebar.astro',
+        ThemeSelect: 'starlight-blog/overrides/ThemeSelect.astro',
+      },
+      sidebar: [
+        {
+          label: 'Guides',
+          items: [{ label: 'Example Guide', link: '/guides/example/' }],
+        },
+      ],
+      title: 'My Docs',
+    }),
+  ],
+})
+```
+
+Обновите конфигурацию коллекций контента Starlight в `src/content/config.ts` , чтобы использовать новую схему, поддерживающую публикации в блогах:
+
+```ts
+import { docsSchema, i18nSchema } from '@astrojs/starlight/schema'
+import { defineCollection } from 'astro:content'
+import { docsAndBlogSchema } from 'starlight-blog/schema'
+
+export const collections = {
+  // Use the Starlight Blog integration schema.
+  docs: defineCollection({ schema: docsAndBlogSchema }),
+  i18n: defineCollection({ type: 'data', schema: i18nSchema() }),
+}
+```
+
+Создайте свою первую публикацию в блоге, создав файл `.md` или `.mdx` в каталоге `src/content/docs/blog/` :
+
+```md
+---
+title: My first blog post
+date: 2023-07-24
+---
+
+## Hello
+
+Hello world!
+```
+
+## Конфигурация
+
+Вы можете передать следующие параметры интеграции Starlight Blog:
+
+Имя | Описание | По умолчанию
+--- | --- | :-:
+`authors` | Список мировых авторов. Посетите страницу [авторов](/guides/authors/) для получения дополнительной информации. | {}
+`postCount` | Количество сообщений блога, отображаемых на странице в списке сообщений блога. | 5
+`recentPostCount` | Количество последних сообщений в блоге, отображаемых на боковой панели. | 10
+`title` | Название блога. | «Блог»
+
+## Фронтматтер
+
+Отдельные сообщения в блоге можно персонализировать, используя их [заголовок](https://astro.build/docs/content#frontmatter) . Сообщение в блоге должно иметь как минимум `title` и `date` (сообщения сортируются по убыванию даты):
+
+```md
+---
+title: Documentation 101
+date: 2023-07-24
+---
+
+Let's learn how to write documentation!
+```
+
+Имя | Описание | Необходимый
+--- | --- | :-:
+`authors` | Автор(ы) сообщения в блоге. Посетите страницу [авторов](/guides/authors/) для получения дополнительной информации. |
+`date` | Дата публикации в блоге, которая должна соответствовать допустимой [временной метке YAML](https://yaml.org/type/timestamp.html) . | ✅
+`excerpt` | Отрывок из сообщения блога, используемый в списке сообщений блога и тегах страниц. Если этот параметр не указан, будет отображено все содержимое сообщения блога. |
+`tags` | Список тегов, связанных с публикацией в блоге. | 
