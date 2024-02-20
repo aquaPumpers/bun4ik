@@ -1,0 +1,28 @@
+---
+title: Добро пожаловать в блог Starlight
+description: Интеграция Astro для Starlight для добавления блога в вашу документацию.
+head:
+  - tag: заголовок
+  content: Звездный блог
+template: всплеск
+editUrl: ЛОЖЬ
+lastUpdated: ЛОЖЬ
+hero:
+  tagline: Интеграция Astro для Starlight для добавления блога в вашу документацию.
+  image:
+    file: "../../assets/houston.webp"
+  actions:
+    - text: Проверить пример
+    link: "/блог"
+    icon: правая стрелка
+    variant: начальный
+    - text: Начиная
+    link: "/руководства/начало работы/"
+    icon: ракета
+---
+
+импортировать { Card, CardGrid } из @astrojs/starlight/comComponents
+
+## Следующие шаги
+
+<cardgrid stagger=""><card title="Настройте интеграцию" icon="setting">Отредактируйте свою конфигурацию в `astro.config.ts`.</card><card title="Прочтите документацию" icon="open-book"> Подробную информацию можно найти в [Документации блога Starlight](/guides/getting-started/).</card></cardgrid> 
